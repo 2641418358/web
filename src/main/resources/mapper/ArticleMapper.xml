@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzhuweb.mapper.article.ArticleMapper">
+
+
+    <resultMap id="BaseArticleDto" type="com.pzhuweb.dto.ArticleDto">
+
+        <id property="id" column="id"/>
+
+        <result property="userid" column="userid"/>
+
+        <result property="title" column="title"/>
+
+        <result property="menuid" column="menuid"/>
+
+        <result property="technologyid" column="technologyid"/>
+
+        <result property="_abstract" column="abstract"/>
+
+        <result property="keywords" column="keywords"/>
+
+        <result property="postlink" column="postlink"/>
+
+        <result property="raw" column="raw"/>
+
+        <result property="context" column="context"/>
+
+        <result property="readnumber" column="readnumber"/>
+
+        <result property="status" column="status"/>
+
+        <result property="top" column="top"/>
+
+        <result property="created_at" column="created_at"/>
+
+        <result property="updated_at" column="updated_at"/>
+
+        <association property="user" column="userid" javaType="com.pzhuweb.entity.User" select="com.pzhuweb.mapper.user.UserMapper.getUserById">
+
+            <id property="id" column="id"/>
+
+        </association>
+
+        <association property="menu" column="menuid" javaType="com.pzhuweb.entity.Menu" select="com.pzhuweb.mapper.menu.MenuMapper.getMenuById">
+
+            <id property="id" column="id"/>
+
+        </association>
+
+        <association property="technology" column="technologyid" javaType="com.pzhuweb.entity.Technology" select="com.pzhuweb.mapper.technology.TechnologyMapper.getTechnologyById">
+
+            <id property="id" column="id"/>
+
+        </association>
+
+    </resultMap>
+
+    <!--根据id查询-->
+    <select id="getArticleByUserId" resultMap="BaseArticleDto" parameterType="String">
+
+      select * from article WHERE userid = #{userid}
+
+    </select>
+
+    <!--查询所有文章-->
+    <select id="getArticle" resultMap="BaseArticleDto">
+        SELECT * FROM article
+    </select>
+
+</mapper>

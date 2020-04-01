@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzhuweb.mapper.userInfo.UserInfoMapper">
+
+
+    <resultMap id="BaseUserInfoMap" type="com.pzhuweb.dto.UserInfoDto">
+
+        <id property="id" column="id"/>
+
+        <result property="school" column="school"/>
+
+        <result property="major" column="major"/>
+
+        <result property="domain" column="domain"/>
+
+        <result property="avatar" column="avatar"/>
+
+        <result property="create_at" column="create_at"/>
+
+        <result property="update_at" column="update_at"/>
+
+        <result property="phone" column="phone"/>
+
+        <result property="description" column="description"/>
+
+        <!-- 学校一对一 -->
+        <association property="_school" column="school" javaType="com.pzhuweb.entity.School" select="com.pzhuweb.mapper.school.SchoolMapper.getSchoolById">
+
+            <id property="id" column="id"/>
+
+            <result property="name" column="name"/>
+
+        </association>
+
+        <!-- major -->
+        <association property="_major" column="major" javaType="com.pzhuweb.entity.Major" select="com.pzhuweb.mapper.major.MajorMapper.getMajorById">
+
+            <id property="id" column="id"/>
+
+            <result property="name" column="name"/>
+
+        </association>
+
+        <!-- domain -->
+        <association property="_domain" column="domain" javaType="com.pzhuweb.entity.Domain" select="com.pzhuweb.mapper.domain.DomainMapper.getDomainById">
+
+            <id property="id" column="id"/>
+
+            <result property="name" column="name"/>
+
+        </association>
+
+
+    </resultMap>
+    <!--根据id查询-->
+    <select id="getUserInfo" resultMap="BaseUserInfoMap" parameterType="String">
+        select * from user_info WHERE id = #{id}
+    </select>
+
+</mapper>

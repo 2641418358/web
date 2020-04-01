@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzhuweb.mapper.resource.ResourceMapper">
+
+
+    <resultMap id="BaseResourceDto" type="com.pzhuweb.dto.ResourceDto">
+
+        <id property="id" column="id"/>
+
+        <result property="userid" column="userid"/>
+
+        <result property="typeid" column="typeid"/>
+
+        <result property="title" column="title"/>
+
+        <result property="description" column="description"/>
+
+        <result property="posterlink" column="posterlink"/>
+
+        <result property="link" column="link"/>
+
+        <result property="attachment" column="attachment"/>
+
+        <result property="status" column="status"/>
+
+        <result property="created_at" column="created_at"/>
+
+        <result property="updated_at" column="updated_at"/>
+
+        <association property="user" column="userid" javaType="com.pzhuweb.entity.User" select="com.pzhuweb.mapper.user.UserMapper.getUserById">
+
+            <id property="id" column="id"/>
+
+        </association>
+
+        <association property="resourceType" column="typeid" javaType="com.pzhuweb.entity.Resource_type" select="com.pzhuweb.mapper.resource_type.ResourceTypeMapper.getResourceTypeById">
+
+            <id property="id" column="id"/>
+
+        </association>
+
+    </resultMap>
+
+    <!--根据id查询-->
+    <select id="getResourceByUserId" resultMap="BaseResourceDto" parameterType="String">
+        select * from resource WHERE userid = #{userid}
+    </select>
+
+    <!--查询所有资源信息-->
+    <select id="getResource" resultMap="BaseResourceDto">
+        select * from resource
+    </select>
+
+</mapper>

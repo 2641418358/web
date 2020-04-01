@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzhuweb.mapper.otherInfo.OtherInfoMapper">
+
+    <!--根据id查询个人文章数以及文章被阅读总数-->
+    <select id="getOtherArtic" resultType="java.util.Map" parameterType="String">
+        SELECT count(1) AS articleNum,
+               sum(readnumber) AS readNum
+        FROM article
+        WHERE userid = #{id}
+
+    </select>
+    
+    <select id="getOtherAchevement" resultType="Integer" parameterType="String">
+        SELECT COUNT(1) AS achievementNum
+        FROM achievement
+        WHERE userid = #{id}
+    </select>
+
+    <select id="getOtherResource" resultType="Integer" parameterType="String">
+        SELECT COUNT(1) AS resourceNum
+        FROM resource
+        WHERE userid = #{id}
+    </select>
+
+    <select id="getOtherFavorite" resultType="Integer" parameterType="String">
+        SELECT COUNT(1) AS favoriteNum
+        FROM favorite
+        WHERE userid = #{id}
+    </select>
+
+</mapper>

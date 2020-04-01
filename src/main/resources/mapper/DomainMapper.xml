@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzhuweb.mapper.domain.DomainMapper">
+
+
+    <resultMap id="BaseDomain" type="com.pzhuweb.entity.Domain">
+
+        <id property="id" column="id"/>
+
+        <result property="name" column="name"/>
+
+        <result property="created_at" column="created_at"/>
+
+        <result property="updated_at" column="updated_at"/>
+
+    </resultMap>
+
+    <!--根据id查询-->
+    <select id="getDomainById" resultMap="BaseDomain" parameterType="Integer">
+        select * from domain WHERE id = #{id}
+    </select>
+
+    <!--查询domian全部信息-->
+    <select id="getDomainInfo" resultMap="BaseDomain">
+        select * FROM  domain
+    </select>
+
+</mapper>

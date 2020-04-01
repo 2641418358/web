@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzhuweb.mapper.resource_type.ResourceTypeMapper">
+
+
+    <resultMap id="BaseResourceTpye" type="com.pzhuweb.entity.Resource_type">
+
+        <id property="id" column="id"/>
+
+        <result property="name" column="name"/>
+
+        <result property="status" column="status"/>
+
+    </resultMap>
+
+    <!--根据id查询-->
+    <select id="getResourceTypeById" resultMap="BaseResourceTpye" parameterType="Integer">
+        select * from resource_type WHERE id = #{id}
+    </select>
+
+    <!--查询所有资源分类-->
+    <select id="getResourceType" resultMap="BaseResourceTpye">
+        select * from resource_type
+    </select>
+
+</mapper>
